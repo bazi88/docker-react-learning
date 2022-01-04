@@ -1,0 +1,34 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@0.5.13
+
+workflows: 
+  version: 2
+  build:
+    jobs:
+      - run_tests
+      - docker/publish:
+          image: bazi88/docker-react-learning
+          dockerfile: dockerfile
+          requires:
+            - run_tests
+          filters:
+            branches:
+              only: 
+                - main
+jobs:
+  run_tests:
+    working_directory: ~/react-ops
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: docker-build
+          command: 'sudo docker build -t -react-ops-container -f Dockerfile.dev'
+      - run:
+          name: docker-test
+          command: 'sudo docker run react-ops-container npm run test -- --coverage'
+
+
