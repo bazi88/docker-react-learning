@@ -24,13 +24,14 @@ jobs:
       - image: circleci/node:10.16.3
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 19.03.13
       - run:
           name: docker-build
           command: 'docker build -t react-ops-container -f Dockerfile.dev .'
       - run:
           name: docker-test
           command: 'docker run -p 8080:80 react-ops-container npm run test -- --coverage'
-      - setup_remote_docker:
-          version: 19.03.13
+
 
 
