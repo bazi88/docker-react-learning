@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run:
           name: docker-build
-          command: 'sudo docker build -t react-ops-container -f Dockerfile.dev'
+          command: 'sudo docker build -t react-ops-container -f Dockerfile.dev .'
       - run:
           name: docker-test
           command: 'sudo docker run react-ops-container npm run test -- --coverage'
