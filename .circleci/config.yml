@@ -8,15 +8,15 @@ workflows:
   build:
     jobs:
       - run_tests
-      - docker/publish:
-          image: bazi88/docker-react-learning
-          dockerfile: dockerfile
+      - build-and-push:
           requires:
-            - run_tests
+            - "run_tests"
           filters:
             branches:
-              only: 
+              only:
+                - master
                 - main
+
 jobs:
   run_tests:
     working_directory: ~/react-ops
@@ -32,6 +32,24 @@ jobs:
       - run:
           name: docker-test
           command: 'docker run -e CI=true -p 8080:80 react-ops-container npm run test -- --coverage'
-
-
-
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: react-ops
+      DOCKER_TAG: latest
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USER
+          docker-password: DOCKER_PASSWORD
+      - docker/build:
+          image: $DOCKER_USER/$DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_USER/$DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
