@@ -2,6 +2,8 @@ FROM node:alpine as build-stage
 
 WORKDIR '/front-end'
 
+RUN rm -rf /front-end/build
+
 COPY package.json .
 
 RUN npm install
