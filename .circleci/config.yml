@@ -20,7 +20,7 @@ jobs:
   run_tests:
     working_directory: ~/react-ops
     docker:
-      - image: circleci/node:12.19.0
+      - image: circleci/node:12.8
     steps:
       - checkout
       - setup_remote_docker:

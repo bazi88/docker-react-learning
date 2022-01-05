@@ -1,4 +1,4 @@
-FROM node:alpine as build-stage 
+FROM node:12.8 as build-stage 
 
 WORKDIR '/front-end'
 
