@@ -4,7 +4,7 @@ WORKDIR '/front-end'
 
 RUN npm install npm@6.14.6 -g
 
-RUN rm -rf /front-end/build && rm -rf /front-end/node_modules && npm cache clean --force  
+RUN rm -rf /build && rm -rf /node_modules && npm cache clean --force  
 
 COPY package.json .
 
