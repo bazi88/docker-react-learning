@@ -1,4 +1,4 @@
-FROM node:12.8 as build-stage 
+FROM node:14.0.0 as build-stage 
 
 WORKDIR '/front-end'
 
