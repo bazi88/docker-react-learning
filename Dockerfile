@@ -2,7 +2,7 @@ FROM node:alpine as build-stage
 
 WORKDIR '/front-end'
 
-RUN rm -rf /front-end/build
+RUN rm -rf /front-end/build/ && rm -rf /front-end/node_modules/ && npm cache clean --force  
 
 COPY package.json .
 
