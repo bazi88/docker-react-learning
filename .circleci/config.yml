@@ -4,7 +4,6 @@ orbs:
   docker: circleci/docker@0.5.13
 
 workflows: 
-  version: 2
   commit:
     jobs:
       - run_tests
