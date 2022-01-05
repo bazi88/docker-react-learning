@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  docker: circleci/docker@1.6.0
+  docker: circleci/docker@1.9.1
 
 workflows: 
   commit:
@@ -20,7 +20,7 @@ jobs:
   run_tests:
     working_directory: ~/react-ops
     docker:
-      - image: circleci/node:12.18.4
+      - image: circleci/node:12.19.0
     steps:
       - checkout
       - setup_remote_docker:
