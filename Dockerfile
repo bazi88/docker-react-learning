@@ -2,9 +2,9 @@ FROM node:alpine as build-stage
 
 WORKDIR '/front-end'
 
-RUN npm install npm@5.3 -g
-
 RUN rm -rf /front-end/build/ && rm -rf /front-end/node_modules/ && npm cache clean --force  
+
+RUN npm install npm@5.3 -g
 
 COPY package.json .
 
